@@ -23,7 +23,7 @@ function Navbar({ openModal, account, walletConnected, setWalletConnected, setAc
   return (
       <div className="navbar">
         <div className="logo">
-          <p>DappStarterKit</p>
+          <p>P2C Admin</p>
         </div>
 
         {

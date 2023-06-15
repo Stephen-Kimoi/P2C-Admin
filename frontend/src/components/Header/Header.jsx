@@ -45,15 +45,15 @@ function Header({ walletConnected }) {
     <div className='container'>
 
       <div className='header-logo'>
-        <h1 className='title'>Dapp starter kit</h1>
-        <img src='./logo4.png' alt="logo" />
+        <h1 className='title'>P2C Admin</h1>
+        {/* <img src='./logo4.png' alt="logo" /> */}
       </div>
        
       {
         !walletConnected ? (
             <div className='warning-box'>
               <p>Connect your wallet to get started</p><br/>
-              <p>Check out the <a href='https://github.com/Stephen-Kimoi/dApp-starter-kit#readme' target='_blank'>documentation</a></p>
+              {/* <p>Check out the <a href='https://github.com/Stephen-Kimoi/dApp-starter-kit#readme' target='_blank'>documentation</a></p> */}
             </div>
         ) : (
             <div className='message-container'>
