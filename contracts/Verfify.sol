@@ -26,6 +26,8 @@ contract VerifiedAddresses {
     mapping(address => bool) private isVerified;
     IFarmDAO public farmDAO;
     IFarmDAO.Dao[] public allDaos; 
+    mapping(uint => bool) public daoVerificationStatus;
+
 
     constructor(address farmDAOAddress) {
         farmDAO = IFarmDAO(farmDAOAddress);
@@ -48,11 +50,22 @@ contract VerifiedAddresses {
     // Gets all DAOs created in the DAO contract
     function getAllDaos() external {
         allDaos = farmDAO.getAllDaos();
+         
+        // Set verification status to false
+        for (uint i = 0; i < allDaos.length; i++) {
+          daoVerificationStatus[allDaos[i].id] = false; // Initially set as not verified
+        }
+    }
+    
+    // Updating verification status of each DAO 
+    function updateDaoVerificationStatus(uint daoId, bool isVerified) private onlyVerified {
+        require(daoId > 0 && daoId <= allDaos.length, "Invalid DAO ID");
+
+        daoVerificationStatus[daoId] = isVerified;
     }
 
-    function performAction() external onlyVerified {
-        // Add your intended actions here
-        // This function can only be executed by verified addresses
+    function performVerification(uint daoId) external onlyVerified {
+        updateDaoVerificationStatus(daoId, true);
     }
 
     // Additional functions to manage the list of verified addresses
