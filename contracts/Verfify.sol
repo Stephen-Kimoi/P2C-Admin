@@ -1,11 +1,34 @@
 // SPDX-License-Identifier: MIT 
 pragma solidity ^0.8.0;
 
+// Interface for farmdao contract
+interface IFarmDAO {
+    struct Dao {
+        address address1;
+        address address2;
+        string description;
+        string farmReports;
+        string financialReports;
+        string name;
+        uint id;
+        uint amountInvested;
+        address[] investors;
+    }
+
+    function getAllDaos() external view returns (Dao[] memory);
+}
+
+
+
+
 contract VerifiedAddresses {
     address[] private verifiedAddresses;
     mapping(address => bool) private isVerified;
+    IFarmDAO public farmDAO;
+    IFarmDAO.Dao[] public allDaos; 
 
-    constructor() {
+    constructor(address farmDAOAddress) {
+        farmDAO = IFarmDAO(farmDAOAddress);
         // Add initial verified addresses during contract deployment
         verifiedAddresses.push(address(0x13Ef924EB7408e90278B86b659960AFb00DDae61)); // Replace with actual verified addresses
         verifiedAddresses.push(address(0x23792579e2979a98D12a33A85e35914079304a56));
@@ -21,6 +44,11 @@ contract VerifiedAddresses {
         require(isVerified[msg.sender], "Unauthorized access");
         _;
     }
+    
+    // Gets all DAOs created in the DAO contract
+    function getAllDaos() external {
+        allDaos = farmDAO.getAllDaos();
+    }
 
     function performAction() external onlyVerified {
         // Add your intended actions here
@@ -28,13 +56,13 @@ contract VerifiedAddresses {
     }
 
     // Additional functions to manage the list of verified addresses
-    function addVerifiedAddress(address _address) external onlyVerified {
+    function addVerifiedAddress(address _address) private onlyVerified {
         require(!isVerified[_address], "Address already verified");
         verifiedAddresses.push(_address);
         isVerified[_address] = true;
     }
 
-    function removeVerifiedAddress(address _address) external onlyVerified {
+    function removeVerifiedAddress(address _address) private onlyVerified {
         require(isVerified[_address], "Address not verified");
         for (uint256 i = 0; i < verifiedAddresses.length; i++) {
             if (verifiedAddresses[i] == _address) {
