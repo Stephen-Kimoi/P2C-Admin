@@ -21,7 +21,7 @@ interface IFarmDAO {
 
 
 
-contract VerifiedAddresses {
+contract Verify {
     address[] private verifiedAddresses;
     mapping(address => bool) private isVerified;
     IFarmDAO public farmDAO;

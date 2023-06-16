@@ -8,18 +8,18 @@ const main = async () => {
   console.log("Deploying contract with the account: ", deployer.address);
   
   // Get contract factory and deploy the contract
-  const contractFactory = await ethers.getContractFactory("SimpleStorage"); 
-  const simpleStorage = await contractFactory.deploy(); 
-  await simpleStorage.deployed(); 
+  const contractFactory = await ethers.getContractFactory("Verify"); 
+  const verify = await contractFactory.deploy("0xd437267AE80B8E748E3f624b0797f89b4C0bFc56"); 
+  await verify.deployed(); 
 
-  console.log("SimpleStorage contract address: ", simpleStorage.address); 
+  console.log("Verify contract address: ", verify.address); 
 
   // Save the contract's artifacts and address in the frontend directory
-  saveFrontendFiles(simpleStorage); 
+  saveFrontendFiles(verify); 
 
 }
 
-const saveFrontendFiles = (simpleStorage) => {
+const saveFrontendFiles = (verify) => {
   const fs = require("fs"); 
   const contractsDir = __dirname + "/../frontend/src/contracts"; 
 
@@ -29,14 +29,14 @@ const saveFrontendFiles = (simpleStorage) => {
 
   fs.writeFileSync(
     contractsDir + '/contracts-address.json', 
-    JSON.stringify({ SimpleStorage: simpleStorage.address }, undefined, 2)
+    JSON.stringify({ verify: verify.address }, undefined, 2)
   ); 
 
-  const SimpleStorageArtifact = hre.artifacts.readArtifactSync("SimpleStorage"); 
+  const verifyArtifact = hre.artifacts.readArtifactSync("verify"); 
 
   fs.writeFileSync(
-    contractsDir + '/SimpleStorage.json', 
-    JSON.stringify(SimpleStorageArtifact, null, 2)
+    contractsDir + '/verify.json', 
+    JSON.stringify(verifyArtifact, null, 2)
   ); 
 
 }
