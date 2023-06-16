@@ -9,7 +9,7 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "deployTestnet": "npx hardhat run scripts/deploy.js --network polygon_mumbai",
+    "deployTestnet": "npx hardhat run scripts/deploy.js --network sepolia",
     "deployLocal": "npx hardhat run scripts/deploy.js --network localhost",
     "runTest": "npx hardhat run test/DecentDisc.js"
   }

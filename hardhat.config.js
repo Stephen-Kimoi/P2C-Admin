@@ -4,7 +4,7 @@ require("dotenv").config();
 /** @type import('hardhat/config').HardhatUserConfig */
 module.exports = {
   solidity: "0.8.18",
-  defaultNetwork: "polygon_mumbai",
+  defaultNetwork: "sepolia",
   networks: {
     hardhat: {}, 
     polygon_mumbai: {
