@@ -8,14 +8,16 @@ function Header({ walletConnected }) {
   const [isSuccess, setIsSuccess] = useState(false); 
   const [txHash, setTxHash] = useState(""); 
 
-  const sendInputMessage = async (e) => {
+  const checkDAOsPresent = async (e) => {
     try {
       e.preventDefault();
-      const simpleStorage = await contractInstance(true); 
+      const verify = await contractInstance(true); 
       
       setIsLoading(true); 
-      const tx = await simpleStorage.set(inputMessage); 
+      const tx = await verify.getAllDaos({ gasLimit: 1000000 }); 
       await tx.wait(); 
+
+      console.log("All DAOs are: ", tx); 
       
       setIsLoading(false); 
       setTxHash(tx.hash); 
@@ -57,16 +59,8 @@ function Header({ walletConnected }) {
             </div>
         ) : (
             <div className='message-container'>
-              <p>Send a message to blockchain</p>
-              <form className='form'>
-                <input 
-                  type='text'
-                  placeholder='Write any message'
-                  onChange={ (e) => setInputMessage(e.target.value) }
-                  value={inputMessage}
-                />
-              <button onClick={sendInputMessage}>Send message</button>
-              </form>
+              <p>Check DAOs created</p>
+              <button onClick={checkDAOsPresent}>Check DAOs present</button>
                   { 
                     isLoading && (
                       <div className='loading-div'>
