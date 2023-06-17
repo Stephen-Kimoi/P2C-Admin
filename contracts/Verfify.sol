@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT 
 pragma solidity ^0.8.0;
 
-// Interface for farmdao contract
+// Interface for FarmDAO contract
 interface IFarmDAO {
     struct Dao {
         address address1;
@@ -18,16 +18,12 @@ interface IFarmDAO {
     function getAllDaos() external view returns (Dao[] memory);
 }
 
-
-
-
 contract Verify {
     address[] private verifiedAddresses;
     mapping(address => bool) private isVerified;
     IFarmDAO public farmDAO;
     IFarmDAO.Dao[] public allDaos; 
     mapping(uint => bool) public daoVerificationStatus;
-
 
     constructor(address farmDAOAddress) {
         farmDAO = IFarmDAO(farmDAOAddress);
@@ -48,13 +44,18 @@ contract Verify {
     }
     
     // Gets all DAOs created in the DAO contract
-    function getAllDaos() external {
-        allDaos = farmDAO.getAllDaos();
-         
+    function getAllDaos() external returns(IFarmDAO.Dao[] memory) {
+        IFarmDAO.Dao[] memory daos = farmDAO.getAllDaos();
+        // allDaos = new IFarmDAO.Dao[](daos.length);
+        
         // Set verification status to false
-        for (uint i = 0; i < allDaos.length; i++) {
-          daoVerificationStatus[allDaos[i].id] = false; // Initially set as not verified
+        for (uint i = 0; i < daos.length; i++) {
+            allDaos[i] = daos[i]; 
+            
+            // Set verification status to false
+            daoVerificationStatus[i] = false;
         }
+        return allDaos; 
     }
     
     // Updating verification status of each DAO 
