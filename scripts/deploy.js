@@ -32,7 +32,7 @@ const saveFrontendFiles = (verify) => {
     JSON.stringify({ verify: verify.address }, undefined, 2)
   ); 
 
-  const verifyArtifact = hre.artifacts.readArtifactSync("verify"); 
+  const verifyArtifact = hre.artifacts.readArtifactSync("Verify"); 
 
   fs.writeFileSync(
     contractsDir + '/verify.json', 

@@ -7,7 +7,7 @@ module.exports = {
   defaultNetwork: "sepolia",
   networks: {
     hardhat: {}, 
-    polygon_mumbai: {
+    sepolia: {
       url: process.env.ALCHEMY_API_KEY, 
       accounts: [process.env.PRIVATE_KEY]
     }
