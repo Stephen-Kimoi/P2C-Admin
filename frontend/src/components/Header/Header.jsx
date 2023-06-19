@@ -13,10 +13,7 @@ function Header({ walletConnected }) {
       e.preventDefault();
       // const verify = await contractInstance(true); 
       // Using farmDao to check addresses 
-      const { farmDAO } = await contractInstance(false); 
-
-      const verifiedAddresses = await farmDAO.methods.verifiedAddresses().call();
-      console.log("Cerified addresses: ")
+      const farmDAO = await contractInstance(false); 
 
       
       setIsLoading(true); 
