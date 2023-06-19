@@ -3,7 +3,7 @@ import contractInstance from '../../ContractInstance/ContractInstance';
 import './Header.css'
 
 function Header({ walletConnected }) {
-  const [inputMessage, setInputMessage] = useState("");
+  // const [inputMessage, setInputMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false); 
   const [isSuccess, setIsSuccess] = useState(false); 
   const [txHash, setTxHash] = useState(""); 
@@ -11,16 +11,23 @@ function Header({ walletConnected }) {
   const checkDAOsPresent = async (e) => {
     try {
       e.preventDefault();
-      const verify = await contractInstance(true); 
+      // const verify = await contractInstance(true); 
+      // Using farmDao to check addresses 
+      const { farmDAO } = await contractInstance(false); 
+
+      const verifiedAddresses = await farmDAO.methods.verifiedAddresses().call();
+      console.log("Cerified addresses: ")
+
       
       setIsLoading(true); 
-      const tx = await verify.getAllDaos({ gasLimit: 1000000 }); 
-      await tx.wait(); 
+      // const tx = await verify.getAllDaos({ gasLimit: 1000000 }); 
+      const daos = await farmDAO.getAllDaos(); 
+      // await daos.wait(); 
 
-      console.log("All DAOs are: ", tx); 
+      console.log("All DAOs are: ", daos); 
       
       setIsLoading(false); 
-      setTxHash(tx.hash); 
+      setTxHash(daos.hash); 
 
       setIsSuccess(true); 
 
