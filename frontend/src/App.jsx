@@ -45,6 +45,7 @@ function App() {
 
       <Header 
         walletConnected={walletConnected}
+        account={account}
       />
     </>
 
