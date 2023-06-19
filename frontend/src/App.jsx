@@ -9,6 +9,8 @@ function App() {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [account, setAccount] = useState(""); 
   const [walletConnected, setWalletConnected] = useState(false); 
+  const [error, setError] = useState(false); 
+  const [errorMessage, setErrorMessage] = useState(""); 
 
 
   function openModal() {
@@ -23,10 +25,14 @@ function App() {
     <>
 
        <ConnectWalletModal 
-        modalIsOpen={modalIsOpen}
-        closeModal={closeModal}
-        setWalletConnected={setWalletConnected}
-        setAccount={setAccount}
+          modalIsOpen={modalIsOpen}
+          closeModal={closeModal}
+          setWalletConnected={setWalletConnected}
+          setAccount={setAccount}
+          setError={setError}
+          setErrorMessage={setErrorMessage}
+          error={error}
+          errorMessage={errorMessage}
       />
 
       <Navbar 
