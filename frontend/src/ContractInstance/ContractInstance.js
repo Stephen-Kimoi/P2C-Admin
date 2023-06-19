@@ -1,6 +1,6 @@
-import { abi as verifyAbi }  from '../contracts/verify.json'; 
+// import { abi as verifyAbi }  from '../contracts/verify.json'; 
 import { abi as farmdaoAbi } from '../contracts/FarmDAO.json'; 
-import { verify as verifyContractAddress } from '../contracts/contracts-address.json'; 
+// import { verify as verifyContractAddress } from '../contracts/contracts-address.json'; 
 import { farmdao as farmDaoContractAddress} from '../contracts/contracts-address.json'; 
 import { ethers } from 'ethers';
 
@@ -13,15 +13,15 @@ const contractInstance = async (needSigner = false) => {
       const signer = await provider.getSigner(); 
 
       if (needSigner) {
-        verify = new ethers.Contract(verifyContractAddress, verifyAbi, signer); 
+        // verify = new ethers.Contract(verifyContractAddress, verifyAbi, signer); 
         farmDAO = new ethers.Contract(farmDaoContractAddress, farmdaoAbi, signer); 
       } else {
-        verify = new ethers.Contract(verifyContractAddress, verifyAbi, provider); 
+        // verify = new ethers.Contract(verifyContractAddress, verifyAbi, provider); 
         farmDAO = new ethers.Contract(farmDaoContractAddress, farmdaoAbi, provider);
       }
       
       console.log("Veerify contract address: ", verify); 
-      return { verify, farmDAO }
+      return farmDAO
     } catch (error) {
         console.error(error)
     }
