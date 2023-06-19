@@ -59,7 +59,7 @@
     justify-content: center;
     background-color: #615e5e;
     width: 90%;
-    height: 40%;
+    height: 80%;
     border-radius: 8px;
     box-shadow: 0 0 16px 1px rgb(184, 179, 179) inset; 
   }
@@ -106,5 +106,49 @@
     border-radius: 5px;
     text-align: center;
     margin-top: 10px;
+  }
+
+  /* Card section */
+  .card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    padding: 20px;
+    padding-top: 15px;
+    grid-gap: 50px;
+  } 
+  
+  .card {
+    width: calc(33.33% - 20px);
+    background-color: #f1f1f1;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  
+  .card-info {
+    margin-bottom: 12px;
+  }
+
+  .card-info p {
+    color: #000;
+    font-size: 1rem;
+  }
+  
+  .card-buttons {
+    display: flex;
+    justify-content: space-between;
+    box-shadow: green;
+  }
+
+  .status .pending {
+    color: red;
+  }
+
+  .status .approved {
+    color: green;
   }
   
