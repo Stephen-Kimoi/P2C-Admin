@@ -41,7 +41,6 @@ function Header({ walletConnected , account}) {
     }
   }
   
-  // Complete this code
   const verifyDAO = async (daoId) => {
     try {
       console.log("Verifying DAO..."); 
@@ -64,6 +63,31 @@ function Header({ walletConnected , account}) {
       setIsLoading(false); 
       checkDAOsPresent(); 
     } catch (error) {
+      console.error(error)
+    }
+  }
+
+  const unverifyDAO = async (daoId) => {
+    try {
+      setLoadingStatement("un-verifying DAO..."); 
+      setShowModal(false); 
+      setIsLoading(true); 
+      const farmDAO = await contractInstance(true);
+      
+      const lowerCaseAccount = account.toLowerCase(); 
+      const isAddressVerified = await farmDAO.isAddressVerified(lowerCaseAccount);
+
+      // Assuming the contract has a function isAddressVerified(address) to check if an address is verified
+      if (!isAddressVerified) {
+        console.error("Unauthorized access");
+        return;
+      }
+
+      await farmDAO.unverifyDao(daoId);
+      setLoadingStatement(""); 
+      setIsLoading(false); 
+      checkDAOsPresent(); 
+    } catch (error){
       console.error(error)
     }
   }
@@ -120,7 +144,13 @@ function Header({ walletConnected , account}) {
           </div> 
         </div>
         <div>
-          <button className="withdraw-button" onClick={() => verifyDAO(item.id)}>Verify DAO</button>
+          { 
+            !item.verified ? (
+              <button className="withdraw-button" onClick={() => verifyDAO(item.id)}>Verify DAO</button>
+            ) : (
+              <button className="withdraw-button" onClick={() => unverifyDAO(item.id)}>Unverify DAO</button>
+            )
+          }
           <button className="exit-button" onClick={handleCloseModal}>Exit</button>
         </div>
       </div>
