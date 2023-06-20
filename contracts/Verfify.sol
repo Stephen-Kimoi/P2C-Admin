@@ -2,31 +2,31 @@
 pragma solidity ^0.8.0;
 
 // Interface for FarmDAO contract
-interface IFarmDAO {
-    struct Dao {
-        address address1;
-        address address2;
-        string description;
-        string farmReports;
-        string financialReports;
-        string name;
-        uint id;
-        uint amountInvested;
-        address[] investors;
-    }
+// interface IFarmDAO {
+//     struct Dao {
+//         address address1;
+//         address address2;
+//         string description;
+//         string farmReports;
+//         string financialReports;
+//         string name;
+//         uint id;
+//         uint amountInvested;
+//         address[] investors;
+//     }
 
-    function getAllDaos() external view returns (Dao[] memory);
-}
+//     function getAllDaos() external view returns (Dao[] memory);
+// }
 
 contract Verify {
     address[] private verifiedAddresses;
     mapping(address => bool) private isVerified;
-    IFarmDAO public farmDAO;
-    IFarmDAO.Dao[] public allDaos; 
+    // IFarmDAO public farmDAO;
+    // IFarmDAO.Dao[] public allDaos; 
     mapping(uint => bool) public daoVerificationStatus;
 
     constructor(address farmDAOAddress) {
-        farmDAO = IFarmDAO(farmDAOAddress);
+        // farmDAO = IFarmDAO(farmDAOAddress);
         // Add initial verified addresses during contract deployment
         verifiedAddresses.push(address(0x13Ef924EB7408e90278B86b659960AFb00DDae61)); // Replace with actual verified addresses
         verifiedAddresses.push(address(0x23792579e2979a98D12a33A85e35914079304a56));
@@ -42,20 +42,26 @@ contract Verify {
         require(isVerified[msg.sender], "Unauthorized access");
         _;
     }
+
+    function getVerifiedAddresses() external view returns (address[] memory) {
+        return verifiedAddresses;
+    }
+
+
     
     // Gets all DAOs created in the DAO contract
-    function getAllDaos() external returns(IFarmDAO.Dao[] memory) {
-        IFarmDAO.Dao[] memory daos = farmDAO.getAllDaos();
+    function getAllDaos() external {
+        // IFarmDAO.Dao[] memory daos = farmDAO.getAllDaos();
         // allDaos = new IFarmDAO.Dao[](daos.length);
         
         // Set verification status to false
-        for (uint i = 0; i < daos.length; i++) {
-            allDaos[i] = daos[i]; 
+        // for (uint i = 0; i < daos.length; i++) {
+        //     allDaos[i] = daos[i]; 
             
-            // Set verification status to false
-            daoVerificationStatus[i] = false;
-        }
-        return allDaos; 
+        //     // Set verification status to false
+        //     daoVerificationStatus[i] = false;
+        // }
+        // return allDaos; 
     }
     
     // Updating verification status of each DAO 

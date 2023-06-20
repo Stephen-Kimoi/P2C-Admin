@@ -57,9 +57,11 @@
     flex-direction: column;
     align-items: center;
     justify-content: space-evenly;
-    background-color: #615e5e;
+    /* background-color: #615e5e; */
+    background: rgb(2,0,36);
+    background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 32%, rgba(0,0,0,1) 100%);
     width: 90%;
-    height: 80vh;
+    height: 95vh;
     border-radius: 8px;
     box-shadow: 0 0 16px 1px rgb(184, 179, 179) inset; 
     padding-top: 200px;
@@ -147,10 +149,25 @@
   }
 
   .status .pending {
+
     color: red;
+    font-size: 1rem;
   }
 
   .status .approved {
     color: green;
+    font-size: 1rem;
+  }
+
+  .dao-name {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  }
+
+  .reports div {
+    border: 1px solid #000;
+    border-radius: 5px;
+    margin: 3px;
+    padding: 10px;
+    cursor: pointer;
   }
   

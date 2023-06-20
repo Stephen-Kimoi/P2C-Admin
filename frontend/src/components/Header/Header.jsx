@@ -41,6 +41,7 @@ function Header({ walletConnected , account}) {
     }
   }
   
+  // Unverify DAO 
   const verifyDAO = async (daoId) => {
     try {
       console.log("Verifying DAO..."); 
@@ -66,7 +67,8 @@ function Header({ walletConnected , account}) {
       console.error(error)
     }
   }
-
+  
+  // Unverify DAO
   const unverifyDAO = async (daoId) => {
     try {
       setLoadingStatement("un-verifying DAO..."); 
@@ -84,6 +86,32 @@ function Header({ walletConnected , account}) {
       }
 
       await farmDAO.unverifyDao(daoId);
+      setLoadingStatement(""); 
+      setIsLoading(false); 
+      checkDAOsPresent(); 
+    } catch (error){
+      console.error(error)
+    }
+  }
+
+  // Remove DAO from marketplace 
+  const removeDAO = async (daoId) => {
+    try {
+      setLoadingStatement("Removing DAO..."); 
+      setShowModal(false); 
+      setIsLoading(true); 
+      const farmDAO = await contractInstance(true);
+      
+      const lowerCaseAccount = account.toLowerCase(); 
+      const isAddressVerified = await farmDAO.isAddressVerified(lowerCaseAccount);
+
+      // Assuming the contract has a function isAddressVerified(address) to check if an address is verified
+      if (!isAddressVerified) {
+        console.error("Unauthorized access");
+        return;
+      }
+
+      await farmDAO.removeDao(daoId, {gasLimit: 150000});
       setLoadingStatement(""); 
       setIsLoading(false); 
       checkDAOsPresent(); 
@@ -148,7 +176,10 @@ function Header({ walletConnected , account}) {
             !item.verified ? (
               <button className="withdraw-button" onClick={() => verifyDAO(item.id)}>Verify DAO</button>
             ) : (
-              <button className="withdraw-button" onClick={() => unverifyDAO(item.id)}>Unverify DAO</button>
+              <>
+                <button className="withdraw-button" onClick={() => unverifyDAO(item.id)}>Unverify DAO</button>
+                {/* <button className="withdraw-button" onClick={() => removeDAO(item.id)}>Remove DAO from Marketplace</button> */}
+              </> 
             )
           }
           <button className="exit-button" onClick={handleCloseModal}>Exit</button>
@@ -186,7 +217,7 @@ function Header({ walletConnected , account}) {
       {
         !walletConnected ? (
             <div className='warning-box'>
-              <p>Connect your wallet to get started</p><br/>
+              <p>Connect your wallet to log in</p><br/>
               {/* <p>Check out the <a href='https://github.com/Stephen-Kimoi/dApp-starter-kit#readme' target='_blank'>documentation</a></p> */}
             </div>
         ) : (
@@ -203,19 +234,19 @@ function Header({ walletConnected , account}) {
                             {/* <p>FUNDS INVESTED: {(parseFloat(utils.formatEther(item.amountInvested))*ethPrice).toFixed(5)} USD</p> */}
                           </div>
                           <div className="card-buttons">
-                            <button onClick={() => handleShowModal("INVEST", item.id.toString(), item)}>DAO details</button>
+                              <button onClick={() => handleShowModal("INVEST", item.id.toString(), item)}>DAO details</button>
+                              {
+                                !item.verified ? (
+                                  <div className='status'>
+                                    <p className='pending'>Pending</p>
+                                  </div>
+                                ) : (
+                                  <div className='status'>
+                                    <p className='approved'>Approved</p>
+                                  </div>
+                                )
+                              }
                           </div>
-                          {
-                            !item.verified ? (
-                              <div className='status'>
-                                <p className='pending'>Pending</p>
-                              </div>
-                            ) : (
-                              <div className='status'>
-                                <p className='approved'>Approved</p>
-                              </div>
-                            )
-                          }
                         </div>
                       ))}
                     </div>

@@ -1,25 +1,18 @@
-import React, { useState } from 'react';
 import './ModalContent.css';
+import '../Header.css'; 
 
-const ModalContent = ({ showModal, handleCloseModal, modalTitle, modalContent }) => {
+const ModalContent = ({ showModal,  modalContent }) => {
 
   return (
     <div>
     {showModal && (
       <div className="modal">
         <div className="modal-content">
-          {/* <button className='modal-close' onClick={handleCloseModal}>
-            X
-          </button> */}
-          {/* <h2 className='modal-title'>{modalTitle}</h2> */}
 
           <div>
             {modalContent}
           </div>
 
-          {/* <button className="close-btn" onClick={handleCloseModal}>
-            Submit
-          </button> */}
         </div>
       </div>
     )}
