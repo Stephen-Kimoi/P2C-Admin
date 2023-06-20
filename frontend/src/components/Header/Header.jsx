@@ -3,30 +3,26 @@ import { utils } from 'ethers';
 import contractInstance from '../../ContractInstance/ContractInstance';
 import './Header.css'
 import ModalContent from './ModalContent/ModalContent';
+import LoadingModal from '../Loading/Loading';
 
 function Header({ walletConnected , account}) {
   // const [inputMessage, setInputMessage] = useState("");
   const [isLoading, setIsLoading] = useState(false); 
+  const [loadingStatement, setLoadingStatement] = useState(""); 
   const [isSuccess, setIsSuccess] = useState(false); 
   const [txHash, setTxHash] = useState(""); 
   const [registeredDAOs, setRegisteredDAOs] = useState([]); 
   const [ethPrice, setEthPrice] = useState(); 
   const [showModal, setShowModal] = useState(false);
   const [modalTitle, setModalTitle] = useState("");
-  const [modalContent, setModalContent] = useState("")
+  const [modalContent, setModalContent] = useState(""); 
 
   const checkDAOsPresent = async () => {
     try {
-      // e.preventDefault();
-      // const verify = await contractInstance(true); 
-      // Using farmDao to check addresses 
       const farmDAO = await contractInstance(false); 
-
       
       setIsLoading(true); 
-      // const tx = await verify.getAllDaos({ gasLimit: 1000000 }); 
       const daos = await farmDAO.getAllDaos(); 
-      // await daos.wait(); 
 
       console.log("All DAOs are: ", daos);
       setRegisteredDAOs(daos);  
@@ -48,20 +44,25 @@ function Header({ walletConnected , account}) {
   // Complete this code
   const verifyDAO = async (daoId) => {
     try {
-      console.log("Verifying DAO...")
+      console.log("Verifying DAO..."); 
+      setLoadingStatement("Verifying DAO..."); 
+      setShowModal(false); 
+      setIsLoading(true); 
       const farmDAO = await contractInstance(true);
       
       const lowerCaseAccount = account.toLowerCase(); 
       const isAddressVerified = await farmDAO.isAddressVerified(lowerCaseAccount);
 
       // Assuming the contract has a function isAddressVerified(address) to check if an address is verified
-
       if (!isAddressVerified) {
         console.error("Unauthorized access");
         return;
       }
-  
+
       await farmDAO.verifyDao(daoId);
+      setLoadingStatement(""); 
+      setIsLoading(false); 
+      checkDAOsPresent(); 
     } catch (error) {
       console.error(error)
     }
@@ -124,34 +125,7 @@ function Header({ walletConnected , account}) {
         </div>
       </div>
     );
-  
-    // const investContent = (
-    //   <div className='content-container'>
-    //     {contentHeader}
-    //     <div>
-    //       <label>Amount: </label>
-    //       <input 
-    //         className='invest-input'
-    //         type="number" 
-    //         placeholder="Enter amount to invest in dollars (USD)" 
-    //         name="DaoName"
-    //         onChange={async (e) => {
-    //           investAMT = e.target.value; 
-    //           const priceInEth = await getPriceConsumer(investAMT); 
-    //           console.log("Price in eth is: ", priceInEth); 
-    //           setInvestmentAmount(priceInEth); 
-    //         }}
-    //       />
-    //     </div>
-    //     <button className="close-btn" onClick={() => investDao(investAMT, parseInt(itemId))}>INVEST</button> 
-    //     <div>
-    //       <button className="withdraw-button" onClick={() => setModalContent(daoContent)}>Check DAO details</button>
-    //       <button className="exit-button" onClick={handleCloseModal}>Exit</button>
-    //     </div>
-    //   </div>
-    // );
-    
-    // Setting title to Invest 
+
     setModalTitle(title);
 
     // Setting the modal content
@@ -187,7 +161,6 @@ function Header({ walletConnected , account}) {
             </div>
         ) : (
             <div className='message-container'>
-              <p>DAOs created</p>
                   {registeredDAOs.length > 0 &&
                     <div className="card-container">
                       {registeredDAOs.map((item, index) => (
@@ -228,6 +201,11 @@ function Header({ walletConnected , account}) {
         showModal={showModal}
         modalTitle={modalTitle}
         modalContent={modalContent}
+      />
+
+     <LoadingModal 
+        loading={isLoading}
+        loadingStatement={loadingStatement}
       />
 
     </div>
