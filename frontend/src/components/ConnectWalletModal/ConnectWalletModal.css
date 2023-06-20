@@ -13,14 +13,14 @@
 
 .modal-container {
  width: 50%;
- height: 60vh;
+ height: 70vh;
  background-color: #fff;
  display: flex;
  align-items: center;
  justify-content: center;
  border-radius: 10px;
  flex-direction: column;
- padding: 1rem;
+ padding-top: 3rem;
  padding-bottom: 100px;
 }
 
