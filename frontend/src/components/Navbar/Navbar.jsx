@@ -23,7 +23,7 @@ function Navbar({ openModal, account, walletConnected, setWalletConnected, setAc
   return (
       <div className="navbar">
         <div className="logo">
-          <p>P2C Admin</p>
+          <p>Investa Farm Admin</p>
         </div>
 
         {

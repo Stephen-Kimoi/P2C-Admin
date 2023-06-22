@@ -210,7 +210,7 @@ function Header({ walletConnected , account}) {
     <div className='container'>
 
       <div className='header-logo'>
-        <h1 className='title'>P2C Admin</h1>
+        <h1 className='title'>Investa Farm Admin</h1>
         {/* <img src='./logo4.png' alt="logo" /> */}
       </div>
        

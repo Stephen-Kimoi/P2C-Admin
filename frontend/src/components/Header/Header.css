@@ -58,8 +58,8 @@
     align-items: center;
     justify-content: space-evenly;
     /* background-color: #615e5e; */
-    background: rgb(2,0,36);
-    background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 32%, rgba(0,0,0,1) 100%);
+    background: rgb(180,255,174);
+    background: linear-gradient(90deg, rgba(180,255,174,1) 0%, rgba(213,255,222,1) 32%, rgba(180,255,174,1) 100%);
     width: 90%;
     height: 95vh;
     border-radius: 8px;
