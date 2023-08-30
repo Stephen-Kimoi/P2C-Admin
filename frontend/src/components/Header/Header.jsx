@@ -264,10 +264,10 @@ function Header({ walletConnected , account}) {
         modalContent={modalContent}
       />
 
-     <LoadingModal 
+     {/* <LoadingModal 
         loading={isLoading}
         loadingStatement={loadingStatement}
-      />
+      /> */}
 
     </div>
   );
