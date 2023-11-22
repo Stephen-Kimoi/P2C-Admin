@@ -33,6 +33,7 @@ contract Verify {
         verifiedAddresses.push(address(0xdc4f6EA5856eDa459286e8D0eF42e389D07137Ff));
         verifiedAddresses.push(address(0x84330E06A6467A9A5C2E79E4812512C0FF61D32a));
         verifiedAddresses.push(address(0x33700a96CC1672C63b0fc750C106D8c3F46463DB));
+        verifiedAddresses.push(address(0xF6B34a431A5FDA268003D3a5613EA4B758d29794));
 
 
         // Set isVerified flag for each verified address to true
