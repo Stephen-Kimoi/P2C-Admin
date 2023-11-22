@@ -31,6 +31,8 @@ contract Verify {
         verifiedAddresses.push(address(0x13Ef924EB7408e90278B86b659960AFb00DDae61)); // Replace with actual verified addresses
         verifiedAddresses.push(address(0x23792579e2979a98D12a33A85e35914079304a56));
         verifiedAddresses.push(address(0xdc4f6EA5856eDa459286e8D0eF42e389D07137Ff));
+        verifiedAddresses.push(address(0x33700a96CC1672C63b0fc750C106D8c3F46463DB));
+        verifiedAddresses.push(address(0xdc4f6EA5856eDa459286e8D0eF42e389D07137Ff));
 
         // Set isVerified flag for each verified address to true
         for (uint256 i = 0; i < verifiedAddresses.length; i++) {
@@ -65,15 +67,15 @@ contract Verify {
     }
     
     // Updating verification status of each DAO 
-    function updateDaoVerificationStatus(uint daoId, bool isVerified) private onlyVerified {
-        require(daoId > 0 && daoId <= allDaos.length, "Invalid DAO ID");
+    // function updateDaoVerificationStatus(uint daoId, bool isVerified) private onlyVerified {
+    //     require(daoId > 0 && daoId <= allDaos.length, "Invalid DAO ID");
 
-        daoVerificationStatus[daoId] = isVerified;
-    }
+    //     daoVerificationStatus[daoId] = isVerified;
+    // }
 
-    function performVerification(uint daoId) external onlyVerified {
-        updateDaoVerificationStatus(daoId, true);
-    }
+    // function performVerification(uint daoId) external onlyVerified {
+    //     updateDaoVerificationStatus(daoId, true);
+    // }
 
     // Additional functions to manage the list of verified addresses
     function addVerifiedAddress(address _address) private onlyVerified {
