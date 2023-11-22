@@ -31,8 +31,9 @@ contract Verify {
         verifiedAddresses.push(address(0x13Ef924EB7408e90278B86b659960AFb00DDae61)); // Replace with actual verified addresses
         verifiedAddresses.push(address(0x23792579e2979a98D12a33A85e35914079304a56));
         verifiedAddresses.push(address(0xdc4f6EA5856eDa459286e8D0eF42e389D07137Ff));
+        verifiedAddresses.push(address(0x84330E06A6467A9A5C2E79E4812512C0FF61D32a));
         verifiedAddresses.push(address(0x33700a96CC1672C63b0fc750C106D8c3F46463DB));
-        verifiedAddresses.push(address(0xdc4f6EA5856eDa459286e8D0eF42e389D07137Ff));
+
 
         // Set isVerified flag for each verified address to true
         for (uint256 i = 0; i < verifiedAddresses.length; i++) {
