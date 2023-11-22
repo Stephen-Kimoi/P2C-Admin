@@ -67,7 +67,7 @@ const ConnectWalletModal = ({ closeModal, modalIsOpen, setWalletConnected, setAc
             {
               !ethereumPresent && (
                 <>
-                  <a className='wallet-button' href="https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn" target='_blank'>Metamask</a>
+                  <a className='wallet-button' href="https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn" target='_blank' rel="noreferrer">Metamask</a>
                   <a className='wallet-button' href='https://chrome.google.com/webstore/detail/coinbase-wallet-extension/hnfanknocfeofbddgcijnmhnfnkdnaad' target='_blank'>Coinbase</a>
                   <a className='wallet-button' href='https://explorer.walletconnect.com/' target='_blank'>WalletConnect</a>
                 </>
