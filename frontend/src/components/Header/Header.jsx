@@ -26,6 +26,7 @@ function Header({ walletConnected , account}) {
 
       console.log("All DAOs are: ", daos);
       setRegisteredDAOs(daos);  
+      console.log("Daos are: ", daos); 
       
       setIsLoading(false); 
       setTxHash(daos.hash); 
@@ -134,7 +135,7 @@ function Header({ walletConnected , account}) {
       <div className='content-container'>
         <h2 className='dao-name'>{item.financialReports}</h2>
         <div className="description">
-          <p>{item.description}</p>
+          <p>{item.name2}</p>
         </div>
         <div className="invested-form">
           <p className='descriptionArea'>Total Amount Invested</p>
@@ -229,7 +230,7 @@ function Header({ walletConnected , account}) {
                           <div className="card-info">
                             <h3>{item.financialReports}</h3> {/* THIS IS A BUG -- MAKE CHANGESS */}
                             <div>Farmer Address 1: {item.address1.slice(0,6)}...{item.address1.slice(38,42)}<br/>Farmer Address 2: {item.address2.slice(0,6)}...{item.address2.slice(38,42)}</div>
-                            <p>DESCRIPTION: {item.description}</p>
+                            <p>DESCRIPTION: {item.name2}</p>
                             {/* <p>FUNDS INVESTED: {(parseFloat(utils.formatEther(item.amountInvested))*ethPrice).toFixed(5)} USD</p> */}
                             {/* <p>FUNDS INVESTED: {(parseFloat(utils.formatEther(item.amountInvested))*ethPrice).toFixed(5)} USD</p> */}
                           </div>

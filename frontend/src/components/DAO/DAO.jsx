@@ -31,7 +31,7 @@ const DAO = ({ daoContent, setShowDao }) => {
                 <h2>{daoContent.financialReports}</h2>
 
                 <div className="description">
-                    <p>{daoContent.description}</p>
+                    <p>{daoContent.name2}</p>
                 </div>
 
                 <div className="invested-form">
